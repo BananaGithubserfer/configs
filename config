@@ -1,223 +1,288 @@
-# Default config for sway
+{
+//СЛОЙ НА КОТОРОМ БУДЕН НАХОДИТСЯ WAYBAR. ПО ДЕФОЛТУ НА САМОМ ВЕРХНЕМ:
+    // "layer": "top",
 
-#
-# Read `man 5 sway` for a complete reference.
+//ПОЛОЖЕНИЕ ПАНЕЛИ НА ЭКРАНЕ TOP, BOTTOM, LEFT, RIGHT:
+    // "position": "top",
 
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
-set $mod Mod1
-exec bash /cmus
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-set $menu dmenu_path | wofy --show drun -I | xargs swaymsg exec --
-# Your preferred terminal emulator
-set $term gnome-terminal
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
-# exec synclient VertScroll=-79 synclient HorizScroll=-79
+//ВЫСОТА ПАНЕЛИ:
+    "height": 18,
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /Free-download-Graphic-Design-Background-Wallpaper-for-.jpg fill
-#
-# Example configuration:
-#
-    output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+//ШИРИНА ПАНЕЛИ:
+    // "width": 1280,
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-### Input configuration
-#
-# Example configuration:
-#
-input * {
-    xkb_layout us,ru
-    xkb_options grp:alt_shift_toggle
-}
-input "2:14:SynPS/2_Synaptics_TouchPad" {
-    dwt enabled
-    tap enabled
-    natural_scroll enabled
-    middle_emulation enabled
-}
-bindsym --to-code XF86AudioRaiseVolume exec --no-startup-id "amixer set Master 5%+ && volnoti-show $(amixer get Master | grep -Po '[0-9]+(?=%)' | head -1)"
-bindsym --to-code XF86AudioLowerVolume exec --no-startup-id "amixer set Master 5%- && volnoti-show $(amixer get Master | grep -Po '[0-9]+(?=%)' | head -1)"
+//МОДУЛИ СЛЕВА, ПО ЦЕНТРУ, СПРАВА:
+    "modules-left": [
+"sway/workspaces",
+"custom/right2",
+"custom/right",
+"custom/right2",
+"custom/right",
+"sway/window",
+"custom/right2",
+"custom/right",
+"custom/right2",
+"custom/right",
+"wlr/taskbar",
+"custom/right2",
+"custom/right",
+"custom/right2",
+"custom/right",
+"clock",
+"custom/right2",
+"custom/right",
+"custom/right2",
+"custom/right",
+"custom/cmusp",
+"custom/cmus",
+"custom/cmusn",
+"custom/right2",
+"custom/gight",
+"custom/right",
+"custom/right2",
+"custom/right",
+"custom/right2",
+    ],
 
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
-### Key bindings
-#
-# Basics:
-	bindsym --to-code ctrl+c+left exec cmus-remote -n
-	bindsym --to-code ctrl+c+right exec cmus-remote -r
-	bindsym --to-code ctrl+c+p exec cmus-remote -u
+    "modules-right": [
+"custom/left2",
+"custom/left",
+"custom/left2",
+"custom/left",
+"custom/left2",
+"network",
+"custom/left", 
+"custom/left2",
+"custom/left",
+"custom/left2",
+"cpu",
+"custom/left", 
+"custom/left2",
+"custom/left",
+"custom/left2",
+"temperature",
+"custom/left", 
+"custom/left2",
+"custom/left",
+"custom/left2",
+"memory",
+"custom/left",
+"custom/left2",
+"custom/left",
+"custom/left2",
+"pulseaudio",
+"custom/left",
+"custom/lang",
+"custom/left2",
+"custom/left",
+"custom/left2",
+"sway/language",
+"custom/left",
+"custom/left2",
+"custom/left",
+"custom/left2",
+"battery"
+    ],
 
-    # Start a terminal
-    bindsym --to-code ctrl+Alt+y exec chromium   
-    bindsym --to-code ctrl+Alt+t exec gnome-terminal
-    bindsym --to-code ctrl+Alt+g exec gedit
-    bindsym --to-code ctrl+Alt+m exec $menu
-    bindsym --to-code ctrl+Alt+n exec nautilus
-    bindsym --to-code ctrl+Alt+l exec libreoffice
+//НАСТРОЙКА МОДУЛЯ ВОРКСПЕЙСОВ:
+      "sway/workspaces": {
+	//ПРОКРУТКА КОЛЕСОМ МЫШИ:
+          "disable-scroll": false,
+	//КАКАЯ ТО ХРЕНЬ ДЛЯ НЕСКОЛЬКИХ ПАНЕЛЕЙ:
+          "all-outputs": false,
+	//ЧТО БУДЕТ ОТОБРАЖАТЬСЯ В НАЗАВАНИИ, ИКОНКА КАК НИЖЕ ИЛИ ИМЯ {name}:
+          "format": "{icon}", 
+	//СОБСТВЕННО НАСТРОЙКИ ИКОНОК ДЛЯ ВОРКСПЕЙСОВ:
+          "format-icons": {
+              "1": "",
+              "2": "",
+              "3": "",
+              "4": "",
+              "5": "",
+             "urgent": "",
+              "focused": "",
+               "default": ""
+          }
+      },
+
+
+//НАСТРОЙКА ПОВЕДЕНИЯ КНОПОК ПЕРЕКЛЮЧЕНИЯ ВОРКСПЕЙСОМ, ТРОГАТЬ ТОЛЬКО ЕСЛИ ДОФИГА УМНЫЙ:
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+
+//ТРЕЙ, РАЗМЕР ИКОНОК И РАСТОЯНИЕ МЕЖДУ НИМИ:
+    "tray": {
+        // "icon-size": 10,
+        "spacing": 10
+    },
+
+
+//ЧАСЫ, ВРЕМЕННАЯ ЗОНА, ФОРМАТ ОТОБРАЖЕНИЯ И ФОРМАТ ОТОБРАЖЕНИЯ ПОСЛЕ НАЖАТИЯ ЛКМ:
+    "clock": {
+        "format": "  {:%H:%M}"
+        //"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        //"format-alt": "{:%Y-%m-%d}"
+    },
+
+//ОТОБРАЖЕНИЕ ЗАГРУЖЕННОСТИ ПРОЦЕССОРА, ФОРМАТ И ВСПЛЫВАЮЩАЯ ПОДСКАЗКА:
+    "cpu": {
+        "format": "  {usage}%",
+        "tooltip": false
+    },
+
+//ОТОБРАЖЕНИЕ КОЛИЧЕСТВА ПОЖИРАЕМОЙ ПАМЯТИ:
+    "memory": {
+        "format": "  {}%"
+    },
+
+//ОТОБРАЖЕНИЕ ИНФЫ С ТЕМПЕРАТУРНЫХ ДАТЧИКОВ, ТАКИХ МОДУЛЕЙ МОЖНО СДЕЛАТЬ НЕСКОЛЬКО И ВЫВЕСТИ НА ПАНЕЛЬ ВСЕ ДАТЧИКИ:
+    "temperature": {
+	//ВЫБОР ДАТЧИКА, ПОСМОТРЕТЬ ДАТЧИКИ МОЖНО ТАК: ls /sys/class/thermal/
+        // "thermal-zone": 0,
+	//ПУТЬ К ДЕРИКТОРИИ УСТРОЙСТВА, МОЖЕШЬ ПОШАРИТСЯ В /sys/class/hwmon/ И НАЙТИ НУЖНОЕ.
+        // "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+	//КРИТИЧЕСКИЙ ТЕМПЕРАТУРНЫЙ ПОРОГ, ПОСЛЕ ПРОХОЖДЕНИЯ КОТОРОГО WAYBAR ТЕБЕ НАМЕКНЕТ ЧТО ВСЕ ПЛОХО:
+        "critical-threshold": 80,
+	//СОБСТВЕННО ФОРМАТ ВЫВОДА ИНВЫ О ТОМ ЧТО СКОРО ТВОЯ СИСТЕМА РЕСТАРТАНЕТ И СБРОСИТ ЧАСТОТЫ:
+        // "format-critical": "{icon} {temperatureC}°C",
+	//ФОРМАТ ВЫВОДА ТЕМПЕРАТУРЫ, ТЕМПЕРАТУРА, ГРАДУС, ИКОНКА.
+        "format": "{icon} {temperatureC}°C",
+	//ФОРМАТ ИКОНКИ ТЕМПЕРАТУРЫ, ВЫБИРАЕТСЯ В ЗАВИСИМОСТИ ОТ ТЕМПЕРАТУРЫ
+        "format-icons": ["", "", ""]
+    },
+
+//ВЫВОД ЯРКОСТИ ДИСПЛЕЯ, ФОРМАТ ВЫВОДА И ФОРМАТ ИКОНКИ:
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+
+//РАСКЛАДКА КЛАВИАТУРЫ:
+	"sway/language": {
+		"format": "  {}",
+		"tooltip": false
+	},
+
+//ВЫВОД ЗАРЯДА БАТАРЕИ, ТУТ САМ ПОЙМЕШЬ ЧТО К ЧЕМУ, ОДНИ ФОРМАТЫ ВЫВОДА:
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": " {icon} {capacity}%",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+
+//ВЫВОД ИНФОРМАЦИИ О СЕТЕВЫХ ПОДКЛЮЧЕНИЯХ, ВЫБОР ИНТЕРФЕЙСА И ФОРМАТЫ ВЫВОДА:
+    "network": {
+        // "interface": "wlp2*",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+//ВЫВОД УРОВНЯ ГРОМКОСТИ С ПУЛЬСАУДИО, КОЛИЧЕСТВО ПРОЦЕНТОВ ПРИ СКРОЛЛЕ, ФОРМАТЫ ВЫВОДА И ЧТО ЗАПУСТИТЬ ПРИ КЛИКЕ ЛКМ:
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+//ОТОБРАЖЕНИЕ АКТИВНОГО ОКНА, ФОРМАТ, МАКСИМАЛЬНАЯ ДЛИНА, МИНИМАЛЬНАЯ ДЛИНА, ПОДЗКАЗКА ПРИ НАВЕДЕНИИ:
+        "sway/window": {
+                "format": "{}",
+		"max-length": 20,
+		"min-length": 20,
+		"tooltip": false
+	},
+
+//ТАСКБАР, ФОРМАТ, РАЗМЕР ИКОНОК, ТЕМА, ПОДЗКАЗКА...:
+"wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 8,
+    "icon-theme": "Papirus-Dark-Custom",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+},
+
+//ПОДКЛЮЧЕНИЕ ДОПОЛНИТЕЛЬНЫХ МОДУЛЕЙ, ПРЕЖДЕ ЧЕМ ЧТО-ТО ГОРОДИТЬ ПОМОТРИ КАКИЕ ЕСТЬ ТУТ: https://github.com/Alexays/Waybar/wiki/Module:-Custom
+    "custom/cmus": {
+        "format": "",
+        //"max-length": 15,
+        "interval": 10,
+        "exec": "cmus-remote -C \"format_print '%a - %t'\"", // artist - title
+        "exec-if": "pgrep cmus",
+        "on-click": "cmus-remote -u",
+        "escape": true
+    },
+    "custom/cmusn": {
+        "format": "→",
+        //"max-length": 10,
+        "interval": 10,
+        "exec": "cmus-remote -C \"format_print '%a - %t'\"", 
+        "exec-if": "pgrep cmus",
+        "on-click": "cmus-remote -n",                      
+        "escape": true  
+                                             
+    },
+    "custom/cmusp": {
+        "format": "←",
+        //"max-length": 15,
+        "interval": 10,
+        "exec": "cmus-remote -C \"format_print '%a - %t'\"",
+        "exec-if": "pgrep cmus",
+        "on-click": "cmus-remote -r",                        
+        "escape": true                                       
+    },
     
-    # Kill focused window
-    bindsym --to-code ctrl+Escape kill
-	
-    # Start your launcher
-    bindsym --to-code ctrl+d exec dmenu
+    
+    
+//ЭТО НУЖНО ДЛЯ ТОГО ЧТО БЫ СДЕЛАТЬ СТРЕЛОЧКИ НА ПАНЕЛИ:
+    "custom/left2": {
+        "format": "",
+        "tooltip": false,
+    },
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-    # Reload the configuration file
-    bindsym ctrl+r reload
+    "custom/right2": {
+        "format": "",
+        "tooltip": false,
+    },
+    "custom/left": {
+        "format": "",
+        "tooltip": false,
+    },
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym ctrl+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym ctrl+left focus left
-    bindsym ctrl+down focus down
-    bindsym ctrl+up focus up
-    bindsym ctrl+right focus right
-
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-#    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym ctrl+Shift+Left move left
-    bindsym ctrl+Shift+Down move down
-    bindsym ctrl+Shift+Up move up
-    bindsym ctrl+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym ctrl+1 workspace number 1
-    bindsym ctrl+2 workspace number 2
-    bindsym ctrl+3 workspace number 3
-    bindsym ctrl+4 workspace number 4
-    bindsym ctrl+5 workspace number 5
-    bindsym ctrl+6 workspace number 6
-    bindsym ctrl+7 workspace number 7
-    bindsym ctrl+8 workspace number 8
-    bindsym ctrl+9 workspace number 9
-    bindsym ctrl+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
-
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
-
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
-
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
-
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
-
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    "custom/right": {
+        "format": "",
+        "tooltip": false,
+    },
+    }
 }
-bindsym $mod+r mode "resize"
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    swaybar_command waybar
-}
-
-include /etc/sway/config.d/*
