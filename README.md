@@ -1,0 +1,3 @@
+# configs
+sway
+waybar
